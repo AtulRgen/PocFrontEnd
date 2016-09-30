@@ -2,7 +2,7 @@
 // Write your Javascript code.
 
 
-var url = 'http://poc-web-api-sneha.cloudapps.click2cloud.org/api/test'//'http://192.168.0.183:812/api/values' //'http://localhost:1025/api/values'//
+var url = 'http://api-nmyproject.cloudapps.click2cloud.org/api/test'//'http://192.168.0.183:812/api/values' //'http://localhost:1025/api/values'//
 var Table = $('#tblentry', '.bs-example');
 var Arr = [];
 var SpReturnVal = '';
@@ -11,11 +11,11 @@ function GetEmployee() {
 
     jQuery.support.cors = true;
     
-    $.get(url + '/GetData', function (person) {
-        bindHtml(person);
-    });
+   // $.get(url + '/GetData', function (person) {
+   //     bindHtml(person);
+   // });
 
-   // GetCall();
+    GetCall();
 }
 
 
