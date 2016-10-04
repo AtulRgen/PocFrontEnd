@@ -8,6 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace TestCoreFrontEnd
 {
@@ -27,7 +32,7 @@ namespace TestCoreFrontEnd
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
-            
+          
 
             Configuration = builder.Build();
         }
@@ -39,13 +44,11 @@ namespace TestCoreFrontEnd
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-            services.AddMvc(options =>
-            {
-                options.FormatterMappings.GetMediaTypeMappingForFormat("json");
-                options.FormatterMappings.GetMediaTypeMappingForFormat("xml");
-                options.FormatterMappings.GetMediaTypeMappingForFormat("txt");
-            });
             services.AddMvc();
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,10 +68,15 @@ namespace TestCoreFrontEnd
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStaticFiles();
+            // Add MVC to the request pipeline.
+           
+
+          
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseStaticFiles();
+            
 
             app.UseMvc(routes =>
             {
