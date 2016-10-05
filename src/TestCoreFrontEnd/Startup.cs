@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.Http;
 
 namespace TestCoreFrontEnd
 {
@@ -76,7 +77,7 @@ namespace TestCoreFrontEnd
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            
+              app.Use(async (context, next) => { context.Response.Headers.Append("Access-Control-Allow-Origin", "*"); await next(); });
 
             app.UseMvc(routes =>
             {
