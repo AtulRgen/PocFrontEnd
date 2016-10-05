@@ -42,7 +42,7 @@ function bindHtml(data) {
         td += '<td>' + data[i].city + '</td>'
         td += '<td>' + data[i].designation + '</td>'
         td += '<td>' + data[i].salary + '</td>'
-        td += '<td> <a asp-controller="Employee"  style="cursor:pointer"  href="' + location.href + '/Employee/Update?id=' + data[i].id + '"  asp-action="Update">Update</a> <a style="cursor:pointer" asp-controller="Employee" onclick="ConfirmDelete(' + data[i].id + ')" asp-action="Delete">Delete</a></td>'
+        td += '<td> <a asp-controller="Employee"  style="cursor:pointer"  href="' + location.href + 'Employee/Update?id=' + data[i].id + '"  asp-action="Update">Update</a> <a style="cursor:pointer" asp-controller="Employee" onclick="ConfirmDelete(' + data[i].id + ')" asp-action="Delete">Delete</a></td>'
 
         tr = tr + td
         tr += '</tr>'
