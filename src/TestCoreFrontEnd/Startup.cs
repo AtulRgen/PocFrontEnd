@@ -46,10 +46,7 @@ namespace TestCoreFrontEnd
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddMvc();
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
-            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +74,7 @@ namespace TestCoreFrontEnd
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-              app.Use(async (context, next) => { context.Response.Headers.Append("Access-Control-Allow-Origin", "*"); await next(); });
+         
 
             app.UseMvc(routes =>
             {
